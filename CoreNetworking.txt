@@ -1,0 +1,86 @@
+Contexts
+	Explain the different contexts with a diagram
+
+Networked
+	Demonstrate how a change to a networked object can be seen on all clients
+
+Default
+	Demonstrate how objects can't change in a default context
+
+Client Context
+	spawn vfx for a single player when a button is pressed - Get local player
+	spawn vfx for all players when a button is pressed
+
+Server Context
+	?
+
+Static Context
+	?
+
+_G
+	Demonstrate how each client and the server have their own version of _G
+	
+require()
+	Demonstrate how each client and the server run their own version of a require()'d script
+
+script.context
+	?
+
+serverUserData
+	?
+	
+clientUserData
+	?
+
+RandomStream
+	Demonstrate multiple client contexts using a RandomStream to generate the same number
+
+Networked properties
+	CoreObject.networkedPropertyChangedEvent
+	CoreObject.SetNetworkedCustomProperty
+	
+Player 
+	bindingPressedEvent
+	resourceChangedEvent
+
+Events
+	Events.Connect
+		Any context
+		Registers the given function to the event name which will be called every time the event is fired using Broadcast
+	Events.Broadcast
+		Any context
+		Broadcasts the given event and fires all listeners attached to the given event name if any exists. The events are not networked and can (only?) fire events defined in the same context.
+	Events.BroadcastToPlayer
+		Server-Only
+		Broadcasts the given event to a specific client over the network and fires all listeners attached to the given event name if any exists on that client.
+		This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
+	Events.BroadcastToAllPlayers
+		Server-Only
+		Broadcasts the given event to all clients over the network and fires all listeners attached to the given event name if any exists.
+		This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
+	Events.ConnectForPlayer
+		Server-Only
+		Registers the given function to the event name which will be called every time the event is fired using BroadcastToServer.
+	Events.BroadcastToServer
+		Client-Only
+		Broadcasts the given event to the server over the network and fires all listeners attached to the given event name if any exists on the server. 
+		This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
+		
+Event Examples
+	Events.Connect + Events.Broadcast
+		Show how this only fires the event in the same context
+	Events.Connect + Events.BroadcastToPlayer
+		Broadcast an event from the server to a single client
+	Events.Connect + Events.BroadcastToAllPlayers
+		Broadcast an event from the server to all clients
+	Events.ConnectForPlayer + Events.BroadcastToServer
+		Broadcast an event from a single client to the server
+		
+Stuff I'm unsure about
+	Objects that replicate events and state between client and server
+		Ability
+		Player
+		Equipment
+		Weapon
+		Trigger?
+		UIButton events?# Core-Networking-Examples

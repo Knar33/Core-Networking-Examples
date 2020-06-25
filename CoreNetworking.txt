@@ -1,86 +1,156 @@
-Contexts
-	Explain the different contexts with a diagram
+Networking Overview
 
-Networked
-	Demonstrate how a change to a networked object can be seen on all clients
+Networking is a notoriously difficult concept to get right in game development, so it's no suprise that it's not the easiest thing to learn in Core. Luckily Core and UE4 do most of the heavy lifting and give us some relatively simple ways to pass data between the server and the clients. 
+
+When you play a single player game everything runs on your computer. All of the game state, scores, locations of objects, and graphics are managed and displayed on your own machine. There is one single copy of the game running locally, and it can access any of the game's state whenever needed. When you press the W key to move, the game checks to make sure you're not running into a wall, your character moves forward, and then a movement animation plays. Multiplayer games are much different. You still run a copy of the game on your local machine, but each player also runs their own copy of the game and the server runs yet another copy of the game. 
+
+The server acts as the final authority for everything important that needs to change in the game: where things are, what they're doing, and what they're allowed to do. The server sends updates to each client as these "networked" objects change. Your local copy of the game receives these updates from the server and updates your local game accordingly. The more often these updates happen, the more synchronized the game will be (I think Core servers currently run at 10HZ which works out to roughly 10 updates per second). Your local copy of the game can safely handle things that never need to change (like a rock) and things that shouldn't be synchronized with other players (like a player's UI). You can think of the server as running the "real" version of the game and each client running a close approximation of what's actually happening on the server. 
+
+Take the same example of moving your character forward but now in a networked game. You press the W key and your client does some local collision calculations to make sure you're not running into a wall, then your client asks the server for permission to move your character forward. The server checks its version of the game to make sure there aren't any obstacles in the way that exist on the server: if not, it will move your character forward on the server. Then that movement information will be "replicated" back to each client who will update the player's position in their version of the game. This is a oversimplification and there's a bit of trickery that goes on to make the game more responsive, like firing an ability as soon as the button is clicked instead of making a network trip first. 
+
+The way Core developers decide whether something is managed by the client or by the server is by using contexts. Understanding these contexts and picking the right one is very important. If we allowed something like the player's HP to be managed by the client, cheaters would be able to set these values to whatever they want to and become invincible. This is why it's important to never trust the client and treat the server as the single authority of truth in your game. 
+
+If you want a more technical and probably more accurate description of what goes on under the hood, check out this article from Unreal Engine (the game engine Core is built on): https://docs.unrealengine.com/en-US/Gameplay/Networking/Overview/index.html
+
+------------------------------------------------------------
+
+Contexts
+https://docs.coregames.com/api/examples/#contexts
+In Core, contexts are like folders and exist in one of two states: networked and non-networked. You can nest multiple contexts but only the outermost one has any effect. Inside of it, every child context acts like a folder.
+Scripts can either run on one or more clients, or on the server. When looking through the Core API Docs, be sure to check the Tags column to see if a function/event/property is "Server-Only" or "Client-Only". 
+When a script spawns an object, it inherits the script's context, even if it is somewhere else in the hierarchy. This means that a script in a server context can never spawn objects that clients can see or interact with.
+There are five types of contexts, Client Context, Default (Non-Networked), Static Context, Server Context and Networked.
++---------------------------------------------------------------------------------------------------------------------------+
+|                    | Default (Non-networked) | Networked            | Client Context | Server Context | Static Context    | 
+|--------------------|-------------------------|----------------------|----------------|----------------|-------------------|
+| Objects can change | no                      | Yes (only by server) | Yes            | Yes            | No                |
+|--------------------|-------------------------|----------------------|----------------|----------------|-------------------|
+| Collision          | Yes   	               | Yes 	              | No             | No 	        | Yes               |
+|--------------------|-------------------------|----------------------|----------------|----------------|-------------------|
+| Objects exist on   | Client and Server       | Client and Server 	  | Client 	       | Server 	    | Client and Server |
+|--------------------|-------------------------|----------------------|----------------|----------------|-------------------|
+| Scripts run on     | Server                  | Server               | Client         | Server 	    | Client and Server |
++---------------------------------------------------------------------------------------------------------------------------+
 
 Default
-	Demonstrate how objects can't change in a default context
+Objects Cannot change. Objects Can have collision. Objects Seen by server and client. Scripts run on the server only.
+When you join a game server, all of the Default objects are loaded onto your version of the game. The client and server never need to transmit data about these objects because they can never change. 
+Your client can safely calculate collisions with Default objects because the server will never disagree with their position or geometry. 
+Scripts in a Default context run on the server and have access to all objects in the hierarchy except for those inside client contexts.
+Objects that you never want to change but you want to have collision should go inside a Default context - For example environment decorations like trees and rocks whose only gameplay function is to look pretty and have collision.
+[Other examples of stuff to put in Default Context?]
+[When it says objects can't change, what exactly can we do in a default script? Is there ever a reason to have default scripts]
 
-Client Context
-	spawn vfx for a single player when a button is pressed - Get local player
-	spawn vfx for all players when a button is pressed
+Networked
+Objects Can be changed by the server. Clients will see those changes. Scripts run on the server only.
+Networked objects live on the server and can be changed only by scripts running on the server. Networked objects get replicated to every client as they change but this costs network resources, too many networked objects moving around will cause lag.
+Networked scripts run on the server and have access to all objects in the hierarchy except for those inside client contexts.
+Anything whose position or state needs to be constantly updated to each client should be in a networked context - For example a moving platform that players jump on and ride. 
+[Other examples of stuff to put in Networked context?]
+[Example: Update a networked object on the server and have each client "see" the change]
 
-Server Context
-	?
+Client 
+Objects can change. Objects will block any cameras unless explicitly set otherwise. Scripts run on the client only.
+There are certain things you absolutely need to run on the client such as your User Interface. Most of these will either be explained in the description of the Core API or in the Tags column (Client-Only), but some things like VFX also need to be on the client
+Scripts in a client context run in the client and have access to all objects except for those inside Server contexts.
+[Attempt to explain how a client script in the hierarchy will run on all clients machines at the same time, and how Game.GetLocalPlayer() helps you show clientside things to a single player]
+[Spawning a client script inside of another client script, how does this work - Is there a way to get a script to only run on a single client]
+[Example: spawn vfx for a single player when a button is pressed - Get local player]
+[Example: spawn vfx for all players when a button is pressed]
 
-Static Context
-	?
+Server
+Objects do not have collision. Objects inside get removed from the client-side copy of the game sent to players. Provides a safeguard for creators if they want to conceal game logic. Scripts run on the server only.
+[Hierarchy]
 
-_G
-	Demonstrate how each client and the server have their own version of _G
-	
-require()
-	Demonstrate how each client and the server run their own version of a require()'d script
+Static
+Almost like the default state (non-networked). Scripts can spawn objects inside a static context. Scripts run on both the server and the client. Useful for things reproduced easily on the client and server with minimal data (procedurally generated maps).
+[Hierarchy]
 
-script.context
-	?
+------------------------------------------------------------
 
 serverUserData
-	?
+?
 	
 clientUserData
-	?
+?
+
+------------------------------------------------------------
 
 RandomStream
-	Demonstrate multiple client contexts using a RandomStream to generate the same number
+Demonstrate multiple client contexts using a RandomStream to generate the same number
+
+------------------------------------------------------------
 
 Networked properties
-	CoreObject.networkedPropertyChangedEvent
-	CoreObject.SetNetworkedCustomProperty
-	
-Player 
-	bindingPressedEvent
-	resourceChangedEvent
+CoreObject.networkedPropertyChangedEvent
+CoreObject.SetNetworkedCustomProperty
+
+------------------------------------------------------------
 
 Events
-	Events.Connect
-		Any context
-		Registers the given function to the event name which will be called every time the event is fired using Broadcast
-	Events.Broadcast
-		Any context
-		Broadcasts the given event and fires all listeners attached to the given event name if any exists. The events are not networked and can (only?) fire events defined in the same context.
-	Events.BroadcastToPlayer
-		Server-Only
-		Broadcasts the given event to a specific client over the network and fires all listeners attached to the given event name if any exists on that client.
-		This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
-	Events.BroadcastToAllPlayers
-		Server-Only
-		Broadcasts the given event to all clients over the network and fires all listeners attached to the given event name if any exists.
-		This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
-	Events.ConnectForPlayer
-		Server-Only
-		Registers the given function to the event name which will be called every time the event is fired using BroadcastToServer.
-	Events.BroadcastToServer
-		Client-Only
-		Broadcasts the given event to the server over the network and fires all listeners attached to the given event name if any exists on the server. 
-		This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
-		
+
+Events.Connect
+Any context
+Registers the given function to the event name which will be called every time the event is fired using Broadcast
+
+Events.Broadcast
+Any context
+Broadcasts the given event and fires all listeners attached to the given event name if any exists. The events are not networked and can (only?) fire events defined in the same context.
+
+Events.BroadcastToPlayer
+Server-Only
+Broadcasts the given event to a specific client over the network and fires all listeners attached to the given event name if any exists on that client.
+This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
+
+Events.BroadcastToAllPlayers
+Server-Only
+Broadcasts the given event to all clients over the network and fires all listeners attached to the given event name if any exists.
+This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
+
+Events.ConnectForPlayer
+Server-Only
+Registers the given function to the event name which will be called every time the event is fired using BroadcastToServer.
+
+Events.BroadcastToServer
+Client-Only
+Broadcasts the given event to the server over the network and fires all listeners attached to the given event name if any exists on the server. 
+This is a networked event. The maximum size a networked event can send is 128bytes and all networked events are subjected to a rate limit of 10 events per second.
+	
+------------------------------------------------------------
+	
 Event Examples
-	Events.Connect + Events.Broadcast
-		Show how this only fires the event in the same context
-	Events.Connect + Events.BroadcastToPlayer
-		Broadcast an event from the server to a single client
-	Events.Connect + Events.BroadcastToAllPlayers
-		Broadcast an event from the server to all clients
-	Events.ConnectForPlayer + Events.BroadcastToServer
-		Broadcast an event from a single client to the server
+
+Events.Connect + Events.Broadcast
+[Show how this only fires the event in the same context]
+
+Events.Connect + Events.BroadcastToPlayer
+[Broadcast an event from the server to a single client]
+	
+Events.Connect + Events.BroadcastToAllPlayers
+[Broadcast an event from the server to all clients]
+	
+Events.ConnectForPlayer + Events.BroadcastToServer
+[Broadcast an event from a single client to the server]
 		
-Stuff I'm unsure about
-	Objects that replicate events and state between client and server
-		Ability
-		Player
-		Equipment
-		Weapon
-		Trigger?
-		UIButton events?# Core-Networking-Examples
+------------------------------------------------------------
+
+Player
+The player is not a Core Object, but it's pretty much like a networked object - Changes to a player will replicate to all clients. 
+Just like with networked objects, a client can read the state of the player but can't modify it.
+If you take a look at the Core API docs section about Players you can see how any function that SETS values (except for cameras) are Server-Only, while any function that just READS values are allowed in any context. 
+
+bindingPressedEvent
+
+resourceChangedEvent
+
+------------------------------------------------------------
+Scripts
+
+_G
+[Demonstrate how each client and the server have their own version of _G]
+	
+require()
+[Demonstrate how each client and the server run their own version of a require()'d script]
+
+script.context
+[Figure out how this works and make an example]

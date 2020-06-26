@@ -70,7 +70,7 @@ Assets {
         Name: "Bone Human Skull 01"
         Transform {
           Location {
-            X: 400
+            X: 600
             Y: -150
             Z: 100
           }

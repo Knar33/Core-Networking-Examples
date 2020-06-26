@@ -19,6 +19,7 @@ Objects {
   ChildIds: 14713340454944924967
   ChildIds: 10005074784157121906
   ChildIds: 14982843161775482339
+  ChildIds: 11400632649171567515
   UnregisteredParameters {
   }
   Collidable_v2 {
@@ -28,6 +29,39 @@ Objects {
     Value: "mc:evisibilitysetting:forceon"
   }
   Folder {
+  }
+}
+Objects {
+  Id: 11400632649171567515
+  Name: "Networking-Example-9"
+  Transform {
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 4781671109827199097
+  WantsNetworking: true
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  TemplateInstance {
+    ParameterOverrideMap {
+      key: 14440490188269309951
+      value {
+        Overrides {
+          Name: "Name"
+          String: "Networking-Example-9"
+        }
+      }
+    }
+    TemplateAsset {
+      Id: 10180849858078034678
+    }
   }
 }
 Objects {

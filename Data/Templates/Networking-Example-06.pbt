@@ -1,13 +1,13 @@
 Assets {
-  Id: 12191112636918142940
-  Name: "Networking-Example-7"
+  Id: 11795115400893033161
+  Name: "Networking-Example-06"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
-      RootId: 1643157530232044218
+      RootId: 6953523404260389745
       Objects {
-        Id: 1643157530232044218
-        Name: "Networking-Example-7"
+        Id: 6953523404260389745
+        Name: "Networking-Example-6"
         Transform {
           Scale {
             X: 1
@@ -16,8 +16,8 @@ Assets {
           }
         }
         ParentId: 4781671109827199097
-        ChildIds: 17738856600223623428
-        ChildIds: 5006819348465019208
+        ChildIds: 3876056236841382696
+        ChildIds: 7122799585655016775
         WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -30,8 +30,8 @@ Assets {
         }
       }
       Objects {
-        Id: 17738856600223623428
-        Name: "Networking-Example-7-Networked"
+        Id: 3876056236841382696
+        Name: "Networking-Example-6"
         Transform {
           Location {
           }
@@ -43,8 +43,14 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 1643157530232044218
+        ParentId: 6953523404260389745
         UnregisteredParameters {
+          Overrides {
+            Name: "cs:StaticContext"
+            ObjectReference {
+              SubObjectId: 7122799585655016775
+            }
+          }
         }
         WantsNetworking: true
         Collidable_v2 {
@@ -55,16 +61,17 @@ Assets {
         }
         Script {
           ScriptAsset {
-            Id: 3614884282601684068
+            Id: 13301727789182989147
           }
         }
       }
       Objects {
-        Id: 5006819348465019208
-        Name: "ClientContext"
+        Id: 7122799585655016775
+        Name: "StaticContext"
         Transform {
           Location {
-            Z: 51.1381531
+            X: 600
+            Z: 100
           }
           Rotation {
           }
@@ -74,8 +81,8 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 1643157530232044218
-        ChildIds: 12033828204836248822
+        ParentId: 6953523404260389745
+        ChildIds: 3081790022282569616
         WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -84,11 +91,12 @@ Assets {
           Value: "mc:evisibilitysetting:inheritfromparent"
         }
         NetworkContext {
+          Type: RuntimeStatic
         }
       }
       Objects {
-        Id: 12033828204836248822
-        Name: "Networking-Example-7"
+        Id: 3081790022282569616
+        Name: "Skull"
         Transform {
           Location {
           }
@@ -100,20 +108,63 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 5006819348465019208
-        UnregisteredParameters {
-        }
+        ParentId: 7122799585655016775
+        ChildIds: 2193228032576667652
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
         Visible_v2 {
           Value: "mc:evisibilitysetting:inheritfromparent"
         }
-        Script {
-          ScriptAsset {
-            Id: 7221990499801459659
+        Folder {
+          IsGroup: true
+        }
+      }
+      Objects {
+        Id: 2193228032576667652
+        Name: "Bone Human Skull 01"
+        Transform {
+          Location {
+          }
+          Rotation {
+            Yaw: 89.9999542
+          }
+          Scale {
+            X: 6.9153533
+            Y: 6.9153533
+            Z: 6.9153533
           }
         }
+        ParentId: 3081790022282569616
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CoreMesh {
+          MeshAsset {
+            Id: 3050582906061201031
+          }
+          Teams {
+            IsTeamCollisionEnabled: true
+            IsEnemyCollisionEnabled: true
+          }
+          EnableCameraCollision: true
+          StaticMesh {
+            Physics {
+            }
+          }
+        }
+      }
+    }
+    Assets {
+      Id: 3050582906061201031
+      Name: "Bone Human Skull 01"
+      PlatformAssetType: 1
+      PrimaryAsset {
+        AssetType: "StaticMeshAssetRef"
+        AssetId: "sm_bones_human_skull_01_ref"
       }
     }
     PrimaryAssetId {

@@ -1,13 +1,13 @@
 Assets {
-  Id: 8578009503078292139
-  Name: "Networking-Example-2"
+  Id: 11283081345237508307
+  Name: "Networking-Example-03"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 8437028391357862846
       Objects {
         Id: 8437028391357862846
-        Name: "Networking-Example-2"
+        Name: "Networking-Example-3"
         Transform {
           Scale {
             X: 1
@@ -45,9 +45,9 @@ Assets {
         ParentId: 8437028391357862846
         ChildIds: 4748418176382792352
         ChildIds: 16070580206623765257
-        ChildIds: 9563439709491786779
         ChildIds: 17418942917667777961
         ChildIds: 6887221126855154969
+        ChildIds: 15380053368653211426
         WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -143,47 +143,6 @@ Assets {
           }
           TriggerShape_v2 {
             Value: "mc:etriggershape:box"
-          }
-        }
-      }
-      Objects {
-        Id: 9563439709491786779
-        Name: "Networking-Example-2"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 3497811798026077441
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:Trigger"
-            ObjectReference {
-              SubObjectId: 16070580206623765257
-            }
-          }
-          Overrides {
-            Name: "cs:CrystalSKull"
-            ObjectReference {
-              SubObjectId: 6887221126855154969
-            }
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 18262737507123347742
           }
         }
       }
@@ -296,6 +255,47 @@ Assets {
           StaticMesh {
             Physics {
             }
+          }
+        }
+      }
+      Objects {
+        Id: 15380053368653211426
+        Name: "Networking-Example-3"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 3497811798026077441
+        UnregisteredParameters {
+          Overrides {
+            Name: "cs:Trigger"
+            ObjectReference {
+              SubObjectId: 16070580206623765257
+            }
+          }
+          Overrides {
+            Name: "cs:CrystalSKull"
+            ObjectReference {
+              SubObjectId: 6887221126855154969
+            }
+          }
+        }
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Script {
+          ScriptAsset {
+            Id: 15958259080156245936
           }
         }
       }

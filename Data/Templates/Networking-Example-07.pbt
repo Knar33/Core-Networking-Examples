@@ -1,13 +1,13 @@
 Assets {
-  Id: 5745927202894535036
-  Name: "Networking-Example-8"
+  Id: 12191112636918142940
+  Name: "Networking-Example-07"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
-      RootId: 14440490188269309951
+      RootId: 1643157530232044218
       Objects {
-        Id: 14440490188269309951
-        Name: "Networking-Example-8"
+        Id: 1643157530232044218
+        Name: "Networking-Example-7"
         Transform {
           Scale {
             X: 1
@@ -16,7 +16,8 @@ Assets {
           }
         }
         ParentId: 4781671109827199097
-        ChildIds: 13926535175400036454
+        ChildIds: 17738856600223623428
+        ChildIds: 5006819348465019208
         WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -29,7 +30,37 @@ Assets {
         }
       }
       Objects {
-        Id: 13926535175400036454
+        Id: 17738856600223623428
+        Name: "Networking-Example-7-Networked"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 1643157530232044218
+        UnregisteredParameters {
+        }
+        WantsNetworking: true
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Script {
+          ScriptAsset {
+            Id: 3614884282601684068
+          }
+        }
+      }
+      Objects {
+        Id: 5006819348465019208
         Name: "ClientContext"
         Transform {
           Location {
@@ -43,8 +74,8 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 14440490188269309951
-        ChildIds: 7576491199148673010
+        ParentId: 1643157530232044218
+        ChildIds: 12033828204836248822
         WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -56,11 +87,10 @@ Assets {
         }
       }
       Objects {
-        Id: 7576491199148673010
-        Name: "Networking-Example-8"
+        Id: 12033828204836248822
+        Name: "Networking-Example-7"
         Transform {
           Location {
-            Z: -51.1381531
           }
           Rotation {
           }
@@ -70,7 +100,9 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 13926535175400036454
+        ParentId: 5006819348465019208
+        UnregisteredParameters {
+        }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -79,7 +111,7 @@ Assets {
         }
         Script {
           ScriptAsset {
-            Id: 9453987834870670965
+            Id: 7221990499801459659
           }
         }
       }

@@ -21,6 +21,7 @@ https://docs.coregames.com/api/examples/#contexts
 In Core, contexts are like folders and exist in one of two states: networked and non-networked. You can nest multiple contexts but only the outermost one has any effect. Inside of it, every child context acts like a folder.
 Scripts can either run on one or more clients, or on the server. When looking through the Core API Docs, be sure to check the Tags column to see if a function/event/property is "Server-Only" or "Client-Only". 
 When a script spawns an object, it inherits the script's context, even if it is somewhere else in the hierarchy. This means that a script in a server context can never spawn objects that clients can see or interact with.
+Some might find it confusing that the root folder of a context (client, server, static) is networked while the things inside are not. Take for example a client context. The ClientContext root folder is (networked) but everything inside is marked as (client). The server will only be able to access the ClientContext root folder, and changes to that folder will replicate to every client - if you move the folder by changing its game world position, all of the client objects inside will also move on the client accordingly. You can't access the objects inside the folder from a networked script though, everything inside is invisible to the server and can only be access from a client script. When you run your project in multiplayer preview, you'll notice how anything inside the folder disappears - The editor preview is basically what the server sees. It's pretty much just a folder that enforces a rule "everything inside this folder is client only" even if you nest different contexts (server, static) inside it they will still end up as client only.
 
 There are five types of contexts, Client Context, Default (Non-Networked), Static Context, Server Context and Networked.
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -86,6 +87,7 @@ standardcombo: "I'm using static context for Valor Strike (and the bomb planting
 Events
 Events are a way to broadcast that something has happened in your game and pass data about what happened, such as a point being scored or a player stepping on a trigger, and are a great way to pass information between the client and the server. 
 Many CoreObjects give us events that we can connect functions to, and the Events namespace gives us the ability to create our own custom events that work the same way. 
+Each "Machine" can broadcast 10 events per second: so each client can broadcast 10 events and the server can broadcast 10 events every second
 
 Events.Connect
 Any context
@@ -117,7 +119,8 @@ This is a networked event. The maximum size a networked event can send is 128byt
 ------------------------------------------------------------
 	
 Event Examples
-The while loop on each event broadcast in the following examples ensures the event fires, and if it's hitting the rate limit it waits.
+The followinge examples work by printing things to the event log, so make sure you turn on View > Event Log
+The while loop on each event broadcast ensures that the event fires, and if it's hitting the rate limit it waits until the next frame and tries again.
 	while Events.Broadcast("BroadcastEvent") == BroadcastEventResultCode.EXCEEDED_RATE_LIMIT do
 	    Task.Wait()
 	end
@@ -151,42 +154,46 @@ CoreObject.networkedPropertyChangedEvent
 CoreObject.SetNetworkedCustomProperty
 	This sets the property to a new value, and can only be set by server
 
-[Example: Have an object with a hit counter above it managed through networked custom property]
+[Networking-Example-12: Have an UI text counter on screen managed through a networked custom property on the networked script, stepping on a trigger increases the count via a client script listener]
 
 ------------------------------------------------------------
 
 serverUserData
-[Shrug emoji]
+[Networking-Example-13: ]
 	
 clientUserData
-[Shrug emoji]
+[Networking-Example-14: ]
 
 ------------------------------------------------------------
 
 RandomStream
-[Example: Demonstrate multiple client contexts using a RandomStream to generate the same number concurrently]
+[Networking-Example-15: Demonstrate multiple client contexts using a RandomStream to generate the same number concurrently]
 
 ------------------------------------------------------------
 
 Player
-The player is not a Core Object, but it's pretty much like a networked object - Changes to a player will replicate to all clients. 
+The player is not a Core Object, but it's kinda like a networked object - Changes to a player will replicate to all clients. 
 Just like with networked objects, a client can read the state of the player but can't modify it.
 If you take a look at the Core API docs section about Players you can see how any function that SETS values (except for cameras) are Server-Only, while any function that just READS values are allowed in any context. 
 
 bindingPressedEvent
 If you hook this event up in a client context, only the player who pressed the key will have the event fire on their client.
+[Networking-Example-16
 
 resourceChangedEvent
+[Networking-Example-17
 
 ------------------------------------------------------------
 Scripts
 
 _G
 [Demonstrate how each client and the server have their own version of _G]
-	
+[Networking-Example-18	
+
 require()
 [Demonstrate how each client and the server run their own version of a require()'d script]
+[Networking-Example-19
 
 script.context
 RyanZ: ".context is not replicated, so a networked script running on the server cannot access the context of a client script. And a client script accessing the context of a networked script will not see any of the data put there on the server by a networked script."
-[Shrug emoji]
+[Networking-Example-20

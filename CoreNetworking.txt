@@ -85,7 +85,7 @@ standardcombo: "I'm using static context for Valor Strike (and the bomb planting
 
 Events
 Events are a way to broadcast that something has happened in your game and pass data about what happened, such as a point being scored or a player stepping on a trigger, and are a great way to pass information between the client and the server. 
-Many CoreObjects give us events that we can connect functions to, and the Events namespace gives us access to creating our own custom events that work the same way. 
+Many CoreObjects give us events that we can connect functions to, and the Events namespace gives us the ability to create our own custom events that work the same way. 
 
 Events.Connect
 Any context
@@ -120,20 +120,20 @@ Event Examples
 
 Events.Connect + Events.Broadcast
 Broadcast an event in the same context
-[Example: Show how this only fires the event in the same context, but things outside the context don't see the event]
-[Example: Show how to pass multiple pieces of data through an event]
+[Networking-Example-7: Show how this only fires the event in the same context, but things outside the context don't see the event]
+[Networking-Example-8: Show how to pass multiple pieces of data through an event]
 
 Events.Connect + Events.BroadcastToPlayer
 Broadcast an event from the server to a single client
-[Example: Broadcast an event from the server to a single client, other clients don't see it]
+[Networking-Example-9: Broadcast an event from the server to a single client, other clients don't see it]
 	
 Events.Connect + Events.BroadcastToAllPlayers
 Broadcast an event from the server to all clients
-[Example: Broadcast an event from the server to all clients]
+[Networking-Example-10: Broadcast an event from the server to all clients]
 	
 Events.ConnectForPlayer + Events.BroadcastToServer
 Broadcast an event from a single client to the server
-[Example: Broadcast an event from a single client to the server - Click a button to toggle visibility of the skull]
+[Networking-Example-11: Broadcast an event from a single client to the server - Click a button to toggle visibility of the skull]
 		
 ------------------------------------------------------------
 

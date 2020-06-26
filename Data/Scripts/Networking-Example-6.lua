@@ -1,19 +1,9 @@
-local TRIGGER = script:GetCustomProperty("Trigger"):WaitForObject()
-local CRYSTAL_SKULL = script:GetCustomProperty("CrystalSKull"):WaitForObject()
+--This is basically the same as example 1, except each client is moving the object without waiting for the network to tell it to move
+local SKULL = script:GetCustomProperty("StaticContext"):WaitForObject()
 
---When the trigger is stepped on, every player sees the crystal skull
-
-function beginOverlap(trigger, other)
-	if other:IsA("Player") then
-		CRYSTAL_SKULL.visibility = Visibility.FORCE_ON
-	end
+function Tick(dt)
+	SKULL:MoveTo(Vector3.New(600, 150, 100), 10)
+	Task.Wait(10)
+	SKULL:MoveTo(Vector3.New(600, -150, 100), 10)
+	Task.Wait(10)
 end
-
-function endOverlap(trigger, other)
-	if other:IsA("Player") then
-		CRYSTAL_SKULL.visibility = Visibility.FORCE_OFF
-	end
-end
-
-TRIGGER.beginOverlapEvent:Connect(beginOverlap)
-TRIGGER.endOverlapEvent:Connect(endOverlap)

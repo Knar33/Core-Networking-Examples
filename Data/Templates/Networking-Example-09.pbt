@@ -1,6 +1,6 @@
 Assets {
   Id: 10180849858078034678
-  Name: "Networking-Example-9"
+  Name: "Networking-Example-09"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {

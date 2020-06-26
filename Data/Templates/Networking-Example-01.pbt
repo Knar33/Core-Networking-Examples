@@ -1,13 +1,13 @@
 Assets {
-  Id: 11795115400893033161
-  Name: "Networking-Example-6"
+  Id: 1559196947146406683
+  Name: "Networking-Example-01"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
-      RootId: 6953523404260389745
+      RootId: 11036185280013971179
       Objects {
-        Id: 6953523404260389745
-        Name: "Networking-Example-6"
+        Id: 11036185280013971179
+        Name: "Networking-Example-1"
         Transform {
           Scale {
             X: 1
@@ -16,8 +16,8 @@ Assets {
           }
         }
         ParentId: 4781671109827199097
-        ChildIds: 3876056236841382696
-        ChildIds: 7122799585655016775
+        ChildIds: 1154076354697677243
+        ChildIds: 10145704945750932994
         WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -30,8 +30,8 @@ Assets {
         }
       }
       Objects {
-        Id: 3876056236841382696
-        Name: "Networking-Example-6"
+        Id: 1154076354697677243
+        Name: "Networking-Example-1"
         Transform {
           Location {
           }
@@ -43,12 +43,12 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 6953523404260389745
+        ParentId: 11036185280013971179
         UnregisteredParameters {
           Overrides {
-            Name: "cs:StaticContext"
+            Name: "cs:BoneHumanSkull01"
             ObjectReference {
-              SubObjectId: 7122799585655016775
+              SubObjectId: 10145704945750932994
             }
           }
         }
@@ -61,73 +61,21 @@ Assets {
         }
         Script {
           ScriptAsset {
-            Id: 13301727789182989147
+            Id: 5257026932180280821
           }
         }
       }
       Objects {
-        Id: 7122799585655016775
-        Name: "StaticContext"
-        Transform {
-          Location {
-            X: 600
-            Z: 100
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 6953523404260389745
-        ChildIds: 3081790022282569616
-        WantsNetworking: true
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        NetworkContext {
-          Type: RuntimeStatic
-        }
-      }
-      Objects {
-        Id: 3081790022282569616
-        Name: "Skull"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 7122799585655016775
-        ChildIds: 2193228032576667652
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        Folder {
-          IsGroup: true
-        }
-      }
-      Objects {
-        Id: 2193228032576667652
+        Id: 10145704945750932994
         Name: "Bone Human Skull 01"
         Transform {
           Location {
+            X: 600
+            Y: -150
+            Z: 100
           }
           Rotation {
-            Yaw: 89.9999542
+            Yaw: 89.9999924
           }
           Scale {
             X: 6.9153533
@@ -135,7 +83,8 @@ Assets {
             Z: 6.9153533
           }
         }
-        ParentId: 3081790022282569616
+        ParentId: 11036185280013971179
+        WantsNetworking: true
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }

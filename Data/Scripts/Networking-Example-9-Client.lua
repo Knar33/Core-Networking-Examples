@@ -11,12 +11,12 @@ end
 function Tick(dt)
 	if isBot1 then
 		Events.Broadcast("BroadcastEvent")
-		Task.Wait(1)
+		Task.Wait(3)
 	end
 end
 
 function EventBroadcasted()
-	--This function will only fire for the player named "Bot1" once per second
+	--This function will only fire for the player named "Bot1" once every 3 seconds
 	print("Event was received on the Client")
 end
 

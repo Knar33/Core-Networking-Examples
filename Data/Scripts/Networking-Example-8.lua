@@ -1,7 +1,7 @@
 function Tick(dt)
 	--pass in parameter1 (Value1) and parameter2 (Value2)
 	Events.Broadcast("BroadcastEvent", "Value1", "Value2")
-	Task.Wait(1)
+	Task.Wait(3)
 end
 
 function EventBroadcasted(parameter1, parameter2)

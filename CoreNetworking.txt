@@ -134,7 +134,7 @@ Broadcast an event from the server to all clients
 Events.ConnectForPlayer + Events.BroadcastToServer
 Broadcast an event from a single client to the server
 [Networking-Example-11: Broadcast an event from a single client to the server - Click a button to toggle visibility of the skull]
-		
+	
 ------------------------------------------------------------
 
 Networked properties
@@ -142,7 +142,10 @@ Networked properties are another way of transmitting certain data from the serve
 An example use for this would be NPC enemy health. When the NPC enemy is hit by a player weapon, the server would change an "HP" Networked Property on the NPC object, and the client would constantly be checking for a change in that property's value and update the health bar accordingly. 
 
 CoreObject.networkedPropertyChangedEvent
+	You can hook a function up to this event on either the client or the server to fire anytime the networked property changes. 
+	For the NPC HP example, you would update the health bar GUI to the new property value whenever this fires 
 CoreObject.SetNetworkedCustomProperty
+	This sets the property to a new value, and can only be set by server
 
 [Example: Have an object with a hit counter above it managed through networked custom property]
 

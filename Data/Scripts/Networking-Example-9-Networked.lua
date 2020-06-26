@@ -14,5 +14,5 @@ function Tick(dt)
 			end
 		end
 	end
-	Task.Wait(1)
+	Task.Wait(3)
 end

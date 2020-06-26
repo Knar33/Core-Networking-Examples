@@ -19,7 +19,7 @@ Objects {
   ChildIds: 14713340454944924967
   ChildIds: 10005074784157121906
   ChildIds: 14982843161775482339
-  ChildIds: 17532261139737011745
+  ChildIds: 4182052870923684137
   UnregisteredParameters {
   }
   Collidable_v2 {
@@ -32,8 +32,8 @@ Objects {
   }
 }
 Objects {
-  Id: 17532261139737011745
-  Name: "Networking-Example-8"
+  Id: 4182052870923684137
+  Name: "Networking-Example-10"
   Transform {
     Scale {
       X: 1
@@ -51,11 +51,11 @@ Objects {
   }
   TemplateInstance {
     ParameterOverrideMap {
-      key: 14440490188269309951
+      key: 8751400646834037894
       value {
         Overrides {
           Name: "Name"
-          String: "Networking-Example-8"
+          String: "Networking-Example-10"
         }
         Overrides {
           Name: "Position"
@@ -70,7 +70,7 @@ Objects {
       }
     }
     TemplateAsset {
-      Id: 5745927202894535036
+      Id: 7738255127754958461
     }
   }
 }

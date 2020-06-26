@@ -1,5 +1,7 @@
 function Tick(dt)
-	Events.Broadcast("BroadcastEvent")
+	while Events.Broadcast("BroadcastEvent") == BroadcastEventResultCode.EXCEEDED_RATE_LIMIT do
+	    Task.Wait()
+	end
 	Task.Wait(3)
 end
 

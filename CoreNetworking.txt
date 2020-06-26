@@ -117,7 +117,11 @@ This is a networked event. The maximum size a networked event can send is 128byt
 ------------------------------------------------------------
 	
 Event Examples
-
+The while loop on each event broadcast in the following examples ensures the event fires, and if it's hitting the rate limit it waits.
+	while Events.Broadcast("BroadcastEvent") == BroadcastEventResultCode.EXCEEDED_RATE_LIMIT do
+	    Task.Wait()
+	end
+	
 Events.Connect + Events.Broadcast
 Broadcast an event in the same context
 [Networking-Example-7: Show how this only fires the event in the same context, but things outside the context don't see the event]

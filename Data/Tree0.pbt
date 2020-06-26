@@ -19,6 +19,7 @@ Objects {
   ChildIds: 14713340454944924967
   ChildIds: 10005074784157121906
   ChildIds: 14982843161775482339
+  ChildIds: 7771497330292945626
   UnregisteredParameters {
   }
   Collidable_v2 {
@@ -28,6 +29,111 @@ Objects {
     Value: "mc:evisibilitysetting:forceon"
   }
   Folder {
+  }
+}
+Objects {
+  Id: 7771497330292945626
+  Name: "Networking-Example-1"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 4781671109827199097
+  ChildIds: 3171986179711978489
+  ChildIds: 17433360232125381688
+  WantsNetworking: true
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Folder {
+    IsGroup: true
+  }
+}
+Objects {
+  Id: 17433360232125381688
+  Name: "Bone Human Skull 01"
+  Transform {
+    Location {
+      X: 400
+      Y: -150
+      Z: 100
+    }
+    Rotation {
+      Yaw: 89.9999924
+    }
+    Scale {
+      X: 6.9153533
+      Y: 6.9153533
+      Z: 6.9153533
+    }
+  }
+  ParentId: 7771497330292945626
+  WantsNetworking: true
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CoreMesh {
+    MeshAsset {
+      Id: 3050582906061201031
+    }
+    Teams {
+      IsTeamCollisionEnabled: true
+      IsEnemyCollisionEnabled: true
+    }
+    EnableCameraCollision: true
+    StaticMesh {
+      Physics {
+      }
+    }
+  }
+}
+Objects {
+  Id: 3171986179711978489
+  Name: "Networking-Example-1"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 7771497330292945626
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:BoneHumanSkull01"
+      ObjectReference {
+        SelfId: 17433360232125381688
+      }
+    }
+  }
+  WantsNetworking: true
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 5257026932180280821
+    }
   }
 }
 Objects {
